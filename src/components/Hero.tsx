@@ -20,7 +20,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen bg-augify-dark pt-24 pb-16 overflow-hidden">
+    <section className="relative bg-augify-dark pt-24 pb-8 overflow-hidden">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -inset-[10%] opacity-30">
           <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#c6d614_0%,_transparent_65%)]"></div>
@@ -69,7 +69,7 @@ const Hero = () => {
         </div>
       </div>
       
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-augify-dark to-transparent"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-augify-dark to-transparent"></div>
     </section>
   );
 };

@@ -14,7 +14,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-augify-dark text-white">
       <Navbar />
-      <main>
+      <main className="flex flex-col space-y-0">
         <Hero />
         <Features />
         <CTA />

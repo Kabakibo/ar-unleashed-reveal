@@ -8,7 +8,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="col-span-1 md:col-span-2">
             <Link to="/" className="inline-block mb-4">
-              <h1 className="text-augify-lime font-bold text-3xl">augify</h1>
+              <img 
+                src="/lovable-uploads/dd644908-17ab-4a42-b8d2-04136cffb4e6.png" 
+                alt="Augify Logo" 
+                className="h-10"
+              />
             </Link>
             <p className="text-white/70 mb-6 max-w-md">
               Transform your reality with our innovative augmented reality technology. Creating immersive experiences has never been easier.

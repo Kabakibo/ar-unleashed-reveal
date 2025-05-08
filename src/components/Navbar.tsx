@@ -33,7 +33,11 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         <Link to="/" className="relative z-10">
-          <h1 className="text-augify-lime font-bold text-3xl md:text-4xl">augify</h1>
+          <img 
+            src="/lovable-uploads/dd644908-17ab-4a42-b8d2-04136cffb4e6.png" 
+            alt="Augify Logo" 
+            className="h-8 md:h-10"
+          />
         </Link>
 
         {/* Mobile menu button */}

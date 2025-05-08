@@ -12,9 +12,6 @@ const About = () => {
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center">
               About <span className="text-augify-lime">Augify</span>
             </h1>
-            <p className="text-xl text-white/80 mb-10 text-center">
-              Learn more about our mission to transform reality with augmented reality technology.
-            </p>
             
             <div className="prose prose-lg max-w-none prose-invert">
               <h2 className="text-3xl font-bold text-augify-lime mb-6">Story of Augify</h2>

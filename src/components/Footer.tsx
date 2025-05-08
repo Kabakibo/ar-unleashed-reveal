@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -14,9 +13,6 @@ const Footer = () => {
                 className="h-10"
               />
             </Link>
-            <p className="text-white/70 mb-6 max-w-md">
-              Transform your reality with our innovative augmented reality technology. Creating immersive experiences has never been easier.
-            </p>
             <div className="flex space-x-4">
               {['facebook', 'twitter', 'instagram', 'youtube'].map((social) => (
                 <a 

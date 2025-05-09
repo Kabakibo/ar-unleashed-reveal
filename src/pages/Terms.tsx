@@ -17,7 +17,7 @@ const Terms = () => {
             </p>
             
             <div className="prose prose-lg max-w-none prose-invert">
-              <p className="font-bold">AGREEMENT TO OUR LEGAL TERMS</p>
+              <p className="font-bold mb-6">AGREEMENT TO OUR LEGAL TERMS</p>
               
               <p>
                 We are 9502-0541 Québec inc. ("Company," "we," "us," "our"), a company registered in Canada, Montreal, Quebec. 
@@ -46,7 +46,7 @@ const Terms = () => {
                 register for the Services. We recommend that you print a copy of these Legal Terms for your records.
               </p>
               
-              <p className="font-bold">TABLE OF CONTENTS</p>
+              <p className="font-bold my-6">TABLE OF CONTENTS</p>
               <ol className="list-decimal pl-5">
                 <li>OUR SERVICES</li>
                 <li>INTELLECTUAL PROPERTY RIGHTS</li>
@@ -79,7 +79,7 @@ const Terms = () => {
                 <li>MISCELLANEOUS</li>
               </ol>
               
-              <h2>1. OUR SERVICES</h2>
+              <h2 className="mt-8">1. OUR SERVICES</h2>
               <p>
                 The information provided when using the Services is not intended for distribution to or use by any person or entity 
                 in any jurisdiction or country where such distribution or use would be contrary to law or regulation or which would 
@@ -91,7 +91,7 @@ const Terms = () => {
                 Services. You may not use the Services in a way that would violate the Gramm-Leach-Bliley Act (GLBA).
               </p>
               
-              <h2>2. INTELLECTUAL PROPERTY RIGHTS</h2>
+              <h2 className="mt-8">2. INTELLECTUAL PROPERTY RIGHTS</h2>
               <p className="font-semibold">Our intellectual property</p>
               <p>
                 We are the owner or the licensee of all intellectual property rights in our Services, including all source code, 

@@ -1,8 +1,14 @@
 
+import { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 const Terms = () => {
+  // Scroll to top when component mounts to fix navigation issue
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-augify-dark text-white">
       <Navbar />

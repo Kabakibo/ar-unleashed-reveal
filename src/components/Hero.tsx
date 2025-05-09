@@ -1,6 +1,7 @@
 
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { Smartphone } from 'lucide-react';
 
 const Hero = () => {
   const phoneRef = useRef<HTMLDivElement>(null);
@@ -55,14 +56,68 @@ const Hero = () => {
           
           <div ref={phoneRef} className="relative flex justify-center items-center lg:justify-end animate-float">
             <div className="relative w-full max-w-md">
-              <div className="absolute -inset-0.5 bg-augify-lime/50 rounded-xl blur-xl opacity-50 animate-pulse"></div>
+              <div className="absolute -inset-0.5 bg-augify-lime/50 rounded-[40px] blur-xl opacity-50 animate-pulse"></div>
               
-              <div className="relative bg-gradient-to-br from-augify-dark/90 to-augify-dark rounded-xl p-4 backdrop-blur-sm">
-                <img 
-                  src="/lovable-uploads/b563fbba-8d9f-49ad-87a8-5392fdb0497b.png" 
-                  alt="Augify AR App Screenshot" 
-                  className="w-full rounded-lg" 
-                />
+              <div className="relative bg-gradient-to-br from-augify-dark/90 to-augify-dark rounded-[40px] p-3 backdrop-blur-sm border border-augify-lime/20">
+                {/* Smartphone frame with app screenshot */}
+                <div className="relative rounded-[32px] overflow-hidden border-8 border-black bg-black">
+                  {/* Top notch */}
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1/3 h-7 bg-black rounded-b-xl z-10"></div>
+                  
+                  <div className="pt-5 pb-8 px-1">
+                    {/* App screenshot */}
+                    <div className="relative">
+                      {/* App UI elements */}
+                      <div className="bg-augify-dark rounded-xl overflow-hidden">
+                        {/* AR View */}
+                        <div className="relative aspect-[9/16] overflow-hidden">
+                          {/* Background image representing AR view */}
+                          <div className="absolute inset-0 bg-gradient-to-b from-augify-darkgray to-augify-dark"></div>
+                          
+                          {/* AR elements */}
+                          <div className="absolute inset-0">
+                            <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                              <div className="w-24 h-24 rounded-full bg-augify-lime/20 flex items-center justify-center animate-pulse">
+                                <Smartphone className="w-12 h-12 text-augify-lime" />
+                              </div>
+                            </div>
+                            
+                            <div className="absolute bottom-12 left-0 right-0 flex justify-center">
+                              <div className="px-5 py-2 bg-augify-lime/90 rounded-full text-augify-dark font-bold text-sm">
+                                AR Active
+                              </div>
+                            </div>
+                            
+                            {/* AR grid lines */}
+                            <div className="absolute inset-0">
+                              <div className="w-full h-full grid grid-cols-6 grid-rows-12 gap-0.5 opacity-20">
+                                {Array(72).fill(0).map((_, i) => (
+                                  <div key={i} className="border border-augify-lime/30"></div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* App controls at bottom */}
+                        <div className="px-4 py-3 flex justify-between items-center">
+                          <div className="w-10 h-10 rounded-full bg-augify-lime/20 flex items-center justify-center">
+                            <div className="w-6 h-6 rounded-full bg-augify-lime/80"></div>
+                          </div>
+                          <div className="w-14 h-14 rounded-full bg-augify-lime flex items-center justify-center">
+                            <div className="w-12 h-12 rounded-full border-2 border-augify-dark"></div>
+                          </div>
+                          <div className="w-10 h-10 rounded-full bg-augify-lime/20 flex items-center justify-center">
+                            <div className="w-5 h-5 text-augify-lime">AR</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Home button/indicator */}
+                  <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1/3 h-1 bg-gray-500 rounded-full"></div>
+                </div>
               </div>
             </div>
           </div>

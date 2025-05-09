@@ -1,11 +1,12 @@
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Smartphone } from 'lucide-react';
 
 const Hero = () => {
   const phoneRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
+  const [animationStep, setAnimationStep] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,8 +21,17 @@ const Hero = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Simple animation cycle for the phone screen
+  useEffect(() => {
+    const animationTimer = setInterval(() => {
+      setAnimationStep(prev => (prev + 1) % 3);
+    }, 2000);
+    
+    return () => clearInterval(animationTimer);
+  }, []);
+
   return (
-    <section className="relative bg-augify-dark pt-24 pb-8 overflow-hidden">
+    <section className="relative bg-augify-dark pt-16 md:pt-20 pb-8 overflow-hidden">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -inset-[10%] opacity-30">
           <div className="w-full h-full bg-[radial-gradient(circle_at_center,_#c6d614_0%,_transparent_65%)]"></div>
@@ -55,7 +65,7 @@ const Hero = () => {
           </div>
           
           <div ref={phoneRef} className="relative flex justify-center items-center lg:justify-end animate-float">
-            <div className="relative w-full max-w-md">
+            <div className="relative w-full max-w-[300px] md:max-w-[320px]">
               <div className="absolute -inset-0.5 bg-augify-lime/50 rounded-[40px] blur-xl opacity-50 animate-pulse"></div>
               
               <div className="relative bg-gradient-to-br from-augify-dark/90 to-augify-dark rounded-[40px] p-3 backdrop-blur-sm border border-augify-lime/20">
@@ -76,13 +86,21 @@ const Hero = () => {
                           
                           {/* AR elements */}
                           <div className="absolute inset-0">
-                            <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                              <div className="w-24 h-24 rounded-full bg-augify-lime/20 flex items-center justify-center animate-pulse">
-                                <Smartphone className="w-12 h-12 text-augify-lime" />
+                            <div className={`absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ${
+                              animationStep === 0 ? 'scale-100' : animationStep === 1 ? 'scale-110' : 'scale-95'
+                            }`}>
+                              <div className="w-20 h-20 rounded-full bg-augify-lime/20 flex items-center justify-center animate-pulse">
+                                <Smartphone 
+                                  className={`w-10 h-10 text-augify-lime transition-all duration-500 ${
+                                    animationStep === 0 ? 'rotate-0' : animationStep === 1 ? 'rotate-12' : 'rotate-[-12deg]'
+                                  }`} 
+                                />
                               </div>
                             </div>
                             
-                            <div className="absolute bottom-12 left-0 right-0 flex justify-center">
+                            <div className={`absolute bottom-12 left-0 right-0 flex justify-center transition-transform duration-700 ${
+                              animationStep === 1 ? 'translate-y-[-10px]' : 'translate-y-0'
+                            }`}>
                               <div className="px-5 py-2 bg-augify-lime/90 rounded-full text-augify-dark font-bold text-sm">
                                 AR Active
                               </div>
@@ -90,7 +108,9 @@ const Hero = () => {
                             
                             {/* AR grid lines */}
                             <div className="absolute inset-0">
-                              <div className="w-full h-full grid grid-cols-6 grid-rows-12 gap-0.5 opacity-20">
+                              <div className={`w-full h-full grid grid-cols-6 grid-rows-12 gap-0.5 opacity-20 transition-opacity duration-500 ${
+                                animationStep === 2 ? 'opacity-30' : 'opacity-15'
+                              }`}>
                                 {Array(72).fill(0).map((_, i) => (
                                   <div key={i} className="border border-augify-lime/30"></div>
                                 ))}
@@ -104,7 +124,9 @@ const Hero = () => {
                           <div className="w-10 h-10 rounded-full bg-augify-lime/20 flex items-center justify-center">
                             <div className="w-6 h-6 rounded-full bg-augify-lime/80"></div>
                           </div>
-                          <div className="w-14 h-14 rounded-full bg-augify-lime flex items-center justify-center">
+                          <div className={`w-14 h-14 rounded-full bg-augify-lime flex items-center justify-center transition-transform duration-500 ${
+                            animationStep === 0 ? 'scale-100' : animationStep === 1 ? 'scale-110 shadow-lg shadow-augify-lime/30' : 'scale-100'
+                          }`}>
                             <div className="w-12 h-12 rounded-full border-2 border-augify-dark"></div>
                           </div>
                           <div className="w-10 h-10 rounded-full bg-augify-lime/20 flex items-center justify-center">

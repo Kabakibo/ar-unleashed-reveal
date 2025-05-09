@@ -74,6 +74,7 @@ const Navbar = () => {
             'fixed top-0 right-0 bottom-0 bg-augify-dark/95 w-64 transition-transform duration-300 ease-in-out transform p-8 pt-20 backdrop-blur-md z-0',
             mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           )}
+          style={{ backgroundImage: 'linear-gradient(to bottom, rgba(17, 17, 17, 0.95), rgba(17, 17, 17, 0.95))' }}
         >
           <div className="flex flex-col space-y-6">
             {['Home', 'About', 'Blog', 'Contact', 'Terms', 'Download'].map((item) => (

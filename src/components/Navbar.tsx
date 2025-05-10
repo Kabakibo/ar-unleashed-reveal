@@ -68,30 +68,47 @@ const Navbar = () => {
           ))}
         </nav>
 
-        {/* Mobile Navigation */}
-        <nav 
-          className={cn(
-            'fixed top-0 right-0 bottom-0 bg-augify-dark/95 w-64 transition-transform duration-300 ease-in-out transform p-8 pt-20 backdrop-blur-md z-0',
-            mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          )}
-          style={{ backgroundImage: 'linear-gradient(to bottom, rgba(17, 17, 17, 0.95), rgba(17, 17, 17, 0.95))' }}
+        {/* Mobile Navigation Overlay + Menu */}
+{mobileMenuOpen && (
+  <div className="fixed inset-0 z-40 flex">
+    {/* Dimmed background (left 1/3) */}
+    <div
+      className="w-1/3 bg-black/50 backdrop-blur-sm"
+      onClick={() => setMobileMenuOpen(false)}
+    />
+
+    {/* Slide-in menu (right 2/3) */}
+    <div
+      className={cn(
+        'w-2/3 h-full bg-white z-50 shadow-lg transform transition-transform duration-300 ease-in-out',
+        mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+      )}
+    >
+      <div className="flex justify-end p-4">
+        <button
+          onClick={() => setMobileMenuOpen(false)}
+          aria-label="Close menu"
+          className="text-black text-2xl"
         >
-          <div className="flex flex-col space-y-6">
-            {['Home', 'About', 'Blog', 'Contact', 'Terms', 'Download'].map((item) => (
-              <Link
-                key={item}
-                to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                className={cn(
-                  'text-white hover:text-augify-lime transition-colors text-xl',
-                  item === 'Home' && 'text-augify-lime'
-                )}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item}
-              </Link>
-            ))}
-          </div>
-        </nav>
+          ✕
+        </button>
+      </div>
+      <div className="flex flex-col space-y-6 px-6">
+        {['Home', 'About', 'Blog', 'Contact', 'Terms', 'Download'].map((item) => (
+          <Link
+            key={item}
+            to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+            className="text-black text-lg hover:text-augify-lime transition-colors"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            {item}
+          </Link>
+        ))}
+      </div>
+    </div>
+  </div>
+)}
+
       </div>
     </header>
   );

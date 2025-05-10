@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useOnClickOutside } from '@/hooks/use-click-outside';
-import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -34,6 +33,21 @@ const Navbar = () => {
       setMobileMenuOpen(false);
     }
   });
+
+  // Prevent body scrolling when mobile menu is open
+  useEffect(() => {
+    if (isMobile) {
+      if (mobileMenuOpen) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen, isMobile]);
 
   return (
     <header
@@ -82,11 +96,19 @@ const Navbar = () => {
           ))}
         </nav>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation - Full screen overlay */}
+        {mobileMenuOpen && (
+          <div 
+            className="fixed inset-0 bg-augify-dark/98 z-0"
+            aria-hidden="true"
+          />
+        )}
+        
+        {/* Mobile Navigation Menu */}
         <div 
           ref={menuRef}
           className={cn(
-            'fixed top-0 right-0 bottom-0 bg-augify-dark/95 w-64 transition-transform duration-300 ease-in-out transform p-8 pt-20 backdrop-blur-md z-0',
+            'fixed top-0 right-0 bottom-0 w-64 transition-transform duration-300 ease-in-out transform p-8 pt-20 z-0',
             mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           )}
           style={{ 

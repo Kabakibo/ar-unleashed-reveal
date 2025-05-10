@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useOnClickOutside } from '@/hooks/use-click-outside';
@@ -11,7 +11,12 @@ const Navbar = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const isMobile = useIsMobile();
+  const location = useLocation();
 
+  // Force scrolled state to be true when mobile menu is open
+  const isScrolled = scrolled || mobileMenuOpen;
+
+  // Handle scroll event
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 20) {
@@ -21,11 +26,20 @@ const Navbar = () => {
       }
     };
 
+    // Set initial scroll state
+    handleScroll();
+    
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  // Reset scroll position and close menu when route changes
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   // Handle clicking outside the menu to close it
   useOnClickOutside([menuRef, buttonRef], () => {
@@ -60,19 +74,20 @@ const Navbar = () => {
   // Close mobile menu when navigating
   const handleNavigation = () => {
     setMobileMenuOpen(false);
+    window.scrollTo(0, 0);
   };
 
   return (
     <header
       className={cn(
         'fixed top-0 w-full z-50 transition-all duration-300',
-        scrolled 
+        isScrolled 
           ? 'bg-augify-dark/95 py-2 shadow-lg backdrop-blur-sm' 
           : 'bg-transparent py-4'
       )}
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-        <Link to="/" className="relative z-50">
+        <Link to="/" className="relative z-50" onClick={handleNavigation}>
           <img 
             src="/lovable-uploads/dd644908-17ab-4a42-b8d2-04136cffb4e6.png" 
             alt="Augify Logo" 
@@ -100,8 +115,9 @@ const Navbar = () => {
               to={item.path}
               className={cn(
                 'text-white hover:text-augify-lime transition-colors relative py-1 group',
-                window.location.pathname === item.path && 'text-augify-lime'
+                location.pathname === item.path && 'text-augify-lime'
               )}
+              onClick={handleNavigation}
             >
               {item.name}
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-augify-lime transition-all group-hover:w-full"></span>
@@ -109,39 +125,26 @@ const Navbar = () => {
           ))}
         </nav>
 
-        {/* Mobile Navigation - Overlay with fixed positioning */}
+        {/* Mobile Navigation - Fixed positioning overlay */}
         {mobileMenuOpen && (
           <div className="fixed inset-0 bg-augify-dark/98 z-40 md:hidden flex flex-col">
-            <div className="flex items-center justify-between px-4 py-4">
-              <Link to="/" onClick={handleNavigation}>
-                <img 
-                  src="/lovable-uploads/dd644908-17ab-4a42-b8d2-04136cffb4e6.png" 
-                  alt="Augify Logo" 
-                  className="h-10"
-                />
-              </Link>
-              {/* Close button is already defined above in the header */}
-            </div>
-            
-            <div className="flex flex-col items-center justify-center flex-grow">
-              <div 
-                ref={menuRef}
-                className="w-full px-8 py-8 flex flex-col space-y-8 items-center"
-              >
-                {navLinks.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.path}
-                    className={cn(
-                      'text-white text-2xl hover:text-augify-lime transition-colors',
-                      window.location.pathname === item.path && 'text-augify-lime'
-                    )}
-                    onClick={handleNavigation}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
+            <div 
+              ref={menuRef}
+              className="h-full w-full flex flex-col items-center justify-center"
+            >
+              {navLinks.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.path}
+                  className={cn(
+                    'text-white text-2xl py-4 hover:text-augify-lime transition-colors',
+                    location.pathname === item.path && 'text-augify-lime'
+                  )}
+                  onClick={handleNavigation}
+                >
+                  {item.name}
+                </Link>
+              ))}
             </div>
           </div>
         )}

@@ -12,6 +12,8 @@ const Index = () => {
     window.scrollTo(0, 0);
     
     // Additional cleanup for any potential mobile menu states
+    document.body.style.overflow = '';
+    
     const handleRouteChange = () => {
       // Reset scroll position when navigating
       window.scrollTo(0, 0);

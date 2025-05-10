@@ -74,13 +74,13 @@ const Navbar = () => {
             mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           )}
         >
-          <div className="flex flex-col space-y-6">
+          <div className="flex flex-col space-y-4">
             {['Home', 'About', 'Blog', 'Contact', 'Terms', 'Download'].map((item) => (
               <Link
                 key={item}
                 to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
                 className={cn(
-                  'text-white hover:text-augify-lime transition-colors text-xl mobile-menu-item',
+                  'w-full px-4 py-2 rounded-md bg-augify-darkgray text-white hover:text-augify-lime transition-colors',
                   item === 'Home' && 'text-augify-lime'
                 )}
                 onClick={() => setMobileMenuOpen(false)}

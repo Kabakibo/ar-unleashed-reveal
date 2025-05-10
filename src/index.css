@@ -65,18 +65,6 @@
   }
 }
 
-.mobile-menu-item {
-  background-color: #222222;
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  width: 100%;
-  display: block;
-}
-
-.mobile-menu-item:hover {
-  background-color: #2a2a2a;
-}
-
 ::-webkit-scrollbar {
   width: 10px;
 }

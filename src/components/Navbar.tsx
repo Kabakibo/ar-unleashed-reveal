@@ -1,10 +1,17 @@
-import { useState, useEffect } from 'react';
+
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { useOnClickOutside } from '@/hooks/use-click-outside';
+import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +27,13 @@ const Navbar = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  // Handle clicking outside the menu to close it
+  useOnClickOutside([menuRef, buttonRef], () => {
+    if (mobileMenuOpen && isMobile) {
+      setMobileMenuOpen(false);
+    }
+  });
 
   return (
     <header
@@ -41,6 +55,7 @@ const Navbar = () => {
 
         {/* Mobile menu button */}
         <button 
+          ref={buttonRef}
           className="md:hidden text-white hover:text-augify-lime transition-colors" 
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"
@@ -68,19 +83,23 @@ const Navbar = () => {
         </nav>
 
         {/* Mobile Navigation */}
-        <nav 
+        <div 
+          ref={menuRef}
           className={cn(
-            'fixed top-0 right-0 bottom-0 bg-augify-dark w-64 transition-transform duration-300 ease-in-out transform p-8 pt-20 z-[100]',
+            'fixed top-0 right-0 bottom-0 bg-augify-dark/95 w-64 transition-transform duration-300 ease-in-out transform p-8 pt-20 backdrop-blur-md z-0',
             mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           )}
+          style={{ 
+            background: 'linear-gradient(to bottom, rgba(34, 34, 34, 0.98), rgba(34, 34, 34, 0.98))'
+          }}
         >
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col space-y-6">
             {['Home', 'About', 'Blog', 'Contact', 'Terms', 'Download'].map((item) => (
               <Link
                 key={item}
                 to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
                 className={cn(
-                  'w-full px-4 py-2 rounded-md bg-augify-darkgray text-white hover:text-augify-lime transition-colors',
+                  'text-white hover:text-augify-lime transition-colors text-xl',
                   item === 'Home' && 'text-augify-lime'
                 )}
                 onClick={() => setMobileMenuOpen(false)}
@@ -89,7 +108,7 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
-        </nav>
+        </div>
       </div>
     </header>
   );

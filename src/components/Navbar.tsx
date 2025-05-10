@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation(); // Get current route
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +21,14 @@ const Navbar = () => {
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
   }, [mobileMenuOpen]);
+
+  const isActive = (item: string) => {
+    const path = location.pathname;
+    return (
+      (item === 'Home' && path === '/') ||
+      (item !== 'Home' && path === `/${item.toLowerCase()}`)
+    );
+  };
 
   return (
     <header
@@ -59,7 +68,7 @@ const Navbar = () => {
               to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
               className={cn(
                 'text-white hover:text-augify-lime transition-colors relative py-1 group',
-                item === 'Home' && 'text-augify-lime'
+                isActive(item) && 'text-augify-lime'
               )}
             >
               {item}
@@ -71,7 +80,7 @@ const Navbar = () => {
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <div className="fixed inset-0 z-50 flex">
-            {/* Dim background (click to close) */}
+            {/* Dim background */}
             <div
               className="w-1/3 bg-black/50 backdrop-blur-sm"
               onClick={() => setMobileMenuOpen(false)}
@@ -102,7 +111,7 @@ const Navbar = () => {
                   to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
                   className={cn(
                     'text-white hover:text-augify-lime transition-colors text-xl',
-                    item === 'Home' && 'text-augify-lime'
+                    isActive(item) && 'text-augify-lime'
                   )}
                   onClick={() => setMobileMenuOpen(false)}
                 >

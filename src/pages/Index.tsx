@@ -8,7 +8,19 @@ import Footer from '@/components/Footer';
 
 const Index = () => {
   useEffect(() => {
+    // Ensure we're at the top of the page when component mounts
     window.scrollTo(0, 0);
+    
+    // Additional cleanup for any potential mobile menu states
+    const handleRouteChange = () => {
+      // Reset scroll position when navigating
+      window.scrollTo(0, 0);
+    };
+    
+    return () => {
+      // Cleanup
+      handleRouteChange();
+    };
   }, []);
 
   return (

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -9,11 +8,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 20);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -21,6 +16,11 @@ const Navbar = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  // Lock background scroll when menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+  }, [mobileMenuOpen]);
 
   return (
     <header
@@ -32,6 +32,7 @@ const Navbar = () => {
       )}
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
+        {/* Logo */}
         <Link to="/" className="relative z-10">
           <img 
             src="/lovable-uploads/dd644908-17ab-4a42-b8d2-04136cffb4e6.png" 
@@ -68,48 +69,47 @@ const Navbar = () => {
           ))}
         </nav>
 
-{/* Mobile Navigation Overlay + Menu */}
-{mobileMenuOpen && (
-  <div className="fixed inset-0 z-50 flex overflow-hidden">
-    {/* Dimmed background (left 1/3) */}
-    <div
-      className="w-1/3 bg-black/50 backdrop-blur-sm"
-      onClick={() => setMobileMenuOpen(false)}
-    />
+        {/* Mobile Navigation Overlay + Menu */}
+        {mobileMenuOpen && (
+          <div className="fixed inset-0 z-50 flex overflow-hidden">
+            {/* Dimmed background (left 1/3) */}
+            <div
+              className="w-1/3 bg-black/50 backdrop-blur-sm"
+              onClick={() => setMobileMenuOpen(false)}
+            />
 
-    {/* Slide-in menu (right 2/3) */}
-    <div
-      className={cn(
-        'w-2/3 h-screen bg-white z-50 shadow-lg transform transition-transform duration-300 ease-in-out flex flex-col',
-        mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-      )}
-    >
-      <div className="flex justify-end p-4">
-        <button
-          onClick={() => setMobileMenuOpen(false)}
-          aria-label="Close menu"
-          className="text-black text-2xl"
-        >
-          ✕
-        </button>
-      </div>
-      <div className="flex flex-col space-y-6 px-6 overflow-y-auto">
-        {['Home', 'About', 'Blog', 'Contact', 'Terms', 'Download'].map((item) => (
-          <Link
-            key={item}
-            to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-            className="text-black text-lg hover:text-augify-lime transition-colors"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            {item}
-          </Link>
-        ))}
-      </div>
-    </div>
-  </div>
-)}
-
-
+            {/* Slide-in menu (right 2/3) */}
+            <div
+              className={cn(
+                'w-2/3 h-screen z-50 shadow-lg transform transition-transform duration-300 ease-in-out flex flex-col',
+                mobileMenuOpen ? 'translate-x-0' : 'translate-x-full',
+                'bg-augify-dark' // BRAND COLOR ✅
+              )}
+            >
+              <div className="flex justify-end p-4">
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  aria-label="Close menu"
+                  className="text-white text-2xl"
+                >
+                  ✕
+                </button>
+              </div>
+              <div className="flex flex-col space-y-6 px-6 overflow-y-auto">
+                {['Home', 'About', 'Blog', 'Contact', 'Terms', 'Download'].map((item) => (
+                  <Link
+                    key={item}
+                    to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+                    className="text-white text-lg hover:text-augify-lime transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );

@@ -38,7 +38,6 @@ const Navbar = () => {
   // Reset scroll position and close menu when route changes
   useEffect(() => {
     setMobileMenuOpen(false);
-    window.scrollTo(0, 0);
   }, [location.pathname]);
 
   // Handle clicking outside the menu to close it
@@ -74,7 +73,6 @@ const Navbar = () => {
   // Close mobile menu when navigating
   const handleNavigation = () => {
     setMobileMenuOpen(false);
-    window.scrollTo(0, 0);
   };
 
   return (
@@ -127,10 +125,10 @@ const Navbar = () => {
 
         {/* Mobile Navigation - Fixed positioning overlay */}
         {mobileMenuOpen && (
-          <div className="fixed inset-0 bg-augify-dark/98 z-40 md:hidden flex flex-col">
+          <div className="fixed inset-0 top-0 right-0 bg-augify-dark/98 z-40 md:hidden">
             <div 
               ref={menuRef}
-              className="h-full w-full flex flex-col items-center justify-center"
+              className="h-full w-full flex flex-col items-end justify-start pt-20 pr-6"
             >
               {navLinks.map((item) => (
                 <Link

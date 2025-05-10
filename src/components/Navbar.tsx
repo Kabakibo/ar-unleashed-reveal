@@ -71,7 +71,7 @@ const Navbar = () => {
 
         {/* Mobile Navigation Overlay + Menu */}
         {mobileMenuOpen && (
-          <div className="fixed inset-0 z-50 flex overflow-hidden">
+          <div className="fixed inset-0 z-50 flex overflow-hidden touch-none">
             {/* Dimmed background (left 1/3) */}
             <div
               className="w-1/3 bg-black/50 backdrop-blur-sm"

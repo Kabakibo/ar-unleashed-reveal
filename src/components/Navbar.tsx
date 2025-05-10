@@ -79,7 +79,7 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="fixed inset-0 z-50 flex">
+          <div className="fixed inset-0 z-50 flex touch-none overflow-hidden">
             {/* Dim background */}
             <div
   className="w-1/3 bg-black/50 backdrop-blur-sm pointer-events-auto touch-none"
@@ -88,10 +88,10 @@ const Navbar = () => {
 
             {/* Slide-in menu panel */}
             <nav
-              className={cn(
-                'w-2/3 h-screen p-8 pt-20 flex flex-col space-y-6 backdrop-blur-md transition-transform duration-300 ease-in-out transform z-50',
-                mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-              )}
+  className={cn(
+    'w-2/3 h-screen overflow-y-auto p-8 pt-20 flex flex-col space-y-6 backdrop-blur-md transition-transform duration-300 ease-in-out transform z-50',
+    mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+  )}
               style={{ backgroundImage: 'linear-gradient(to bottom, rgba(17, 17, 17, 0.95), rgba(17, 17, 17, 0.95))' }}
             >
               {/* Close X */}

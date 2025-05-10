@@ -77,51 +77,49 @@ const Navbar = () => {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="fixed inset-0 z-50 bg-transparent">
-            <div className="absolute inset-0 flex touch-none overflow-hidden">
-              {/* Dimmed background */}
-              <div
-                className="w-1/3 bg-black/50 backdrop-blur-sm pointer-events-auto touch-none"
-                onClick={() => setMobileMenuOpen(false)}
-              />
+          <div className="fixed inset-0 z-50">
+            {/* Dimmed overlay */}
+            <div
+              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+              onClick={() => setMobileMenuOpen(false)}
+            />
 
-              {/* Slide-in menu */}
-              <nav
-                className={cn(
-                  'w-2/3 h-full overflow-y-auto p-8 pt-20 flex flex-col space-y-6 backdrop-blur-md transition-transform duration-300 ease-in-out transform z-50',
-                  mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-                )}
-                style={{
-                  backgroundImage:
-                    'linear-gradient(to bottom, rgba(17, 17, 17, 0.95), rgba(17, 17, 17, 0.95))',
-                }}
-              >
-                {/* Close X */}
-                <div className="absolute top-4 right-4">
-                  <button
-                    onClick={() => setMobileMenuOpen(false)}
-                    aria-label="Close menu"
-                    className="text-white text-2xl"
-                  >
-                    ✕
-                  </button>
-                </div>
+            {/* Slide-in full-screen menu panel */}
+            <nav
+              className={cn(
+                'fixed top-0 right-0 h-screen w-2/3 bg-augify-dark z-50 p-8 pt-20 flex flex-col space-y-6 transform transition-transform duration-300 ease-in-out overflow-y-auto',
+                mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+              )}
+              style={{
+                backgroundImage:
+                  'linear-gradient(to bottom, rgba(17, 17, 17, 0.95), rgba(17, 17, 17, 0.95))',
+              }}
+            >
+              {/* Close X */}
+              <div className="absolute top-4 right-4">
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  aria-label="Close menu"
+                  className="text-white text-2xl"
+                >
+                  ✕
+                </button>
+              </div>
 
-                {['Home', 'About', 'Blog', 'Contact', 'Terms', 'Download'].map((item) => (
-                  <Link
-                    key={item}
-                    to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                    className={cn(
-                      'text-white hover:text-augify-lime transition-colors text-xl',
-                      isActive(item) && 'text-augify-lime'
-                    )}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {item}
-                  </Link>
-                ))}
-              </nav>
-            </div>
+              {['Home', 'About', 'Blog', 'Contact', 'Terms', 'Download'].map((item) => (
+                <Link
+                  key={item}
+                  to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+                  className={cn(
+                    'text-white hover:text-augify-lime transition-colors text-xl',
+                    isActive(item) && 'text-augify-lime'
+                  )}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item}
+                </Link>
+              ))}
+            </nav>
           </div>
         )}
       </div>

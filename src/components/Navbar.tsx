@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -71,10 +70,9 @@ const Navbar = () => {
         {/* Mobile Navigation */}
         <nav 
           className={cn(
-            'fixed top-0 right-0 bottom-0 bg-augify-dark/95 w-64 transition-transform duration-300 ease-in-out transform p-8 pt-20 backdrop-blur-md z-0',
+            'fixed top-0 right-0 bottom-0 bg-augify-dark w-64 transition-transform duration-300 ease-in-out transform p-8 pt-20 z-[100]',
             mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           )}
-          style={{ backgroundImage: 'linear-gradient(to bottom, rgba(17, 17, 17, 0.95), rgba(17, 17, 17, 0.95))' }}
         >
           <div className="flex flex-col space-y-6">
             {['Home', 'About', 'Blog', 'Contact', 'Terms', 'Download'].map((item) => (
@@ -82,7 +80,7 @@ const Navbar = () => {
                 key={item}
                 to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
                 className={cn(
-                  'text-white hover:text-augify-lime transition-colors text-xl',
+                  'text-white hover:text-augify-lime transition-colors text-xl mobile-menu-item',
                   item === 'Home' && 'text-augify-lime'
                 )}
                 onClick={() => setMobileMenuOpen(false)}

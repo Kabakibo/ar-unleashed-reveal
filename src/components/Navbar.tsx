@@ -82,9 +82,9 @@ const Navbar = () => {
           <div className="fixed inset-0 z-50 flex">
             {/* Dim background */}
             <div
-              className="w-1/3 bg-black/50 backdrop-blur-sm"
-              onClick={() => setMobileMenuOpen(false)}
-            />
+  className="w-1/3 bg-black/50 backdrop-blur-sm pointer-events-auto touch-none"
+  onClick={() => setMobileMenuOpen(false)}
+/>
 
             {/* Slide-in menu panel */}
             <nav

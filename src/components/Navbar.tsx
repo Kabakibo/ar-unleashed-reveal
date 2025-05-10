@@ -68,9 +68,9 @@ const Navbar = () => {
           ))}
         </nav>
 
-        {/* Mobile Navigation Overlay + Menu */}
+{/* Mobile Navigation Overlay + Menu */}
 {mobileMenuOpen && (
-  <div className="fixed inset-0 z-40 flex">
+  <div className="fixed inset-0 z-50 flex overflow-hidden">
     {/* Dimmed background (left 1/3) */}
     <div
       className="w-1/3 bg-black/50 backdrop-blur-sm"
@@ -80,7 +80,7 @@ const Navbar = () => {
     {/* Slide-in menu (right 2/3) */}
     <div
       className={cn(
-        'w-2/3 h-full bg-white z-50 shadow-lg transform transition-transform duration-300 ease-in-out',
+        'w-2/3 h-screen bg-white z-50 shadow-lg transform transition-transform duration-300 ease-in-out flex flex-col',
         mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
       )}
     >
@@ -93,7 +93,7 @@ const Navbar = () => {
           ✕
         </button>
       </div>
-      <div className="flex flex-col space-y-6 px-6">
+      <div className="flex flex-col space-y-6 px-6 overflow-y-auto">
         {['Home', 'About', 'Blog', 'Contact', 'Terms', 'Download'].map((item) => (
           <Link
             key={item}
@@ -108,6 +108,7 @@ const Navbar = () => {
     </div>
   </div>
 )}
+
 
       </div>
     </header>

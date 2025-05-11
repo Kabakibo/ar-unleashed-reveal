@@ -80,9 +80,9 @@ const Navbar = () => {
           <div className="fixed inset-0 z-50">
             {/* Dimmed overlay */}
             <div
-              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-              onClick={() => setMobileMenuOpen(false)}
-            />
+className="fixed top-0 left-0 h-screen w-1/3 bg-black/50 backdrop-blur-sm z-40 pointer-events-auto touch-none cursor-pointer"
+  onClick={() => setMobileMenuOpen(false)}
+/>
 
             {/* Slide-in full-screen menu panel */}
             <nav

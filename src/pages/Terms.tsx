@@ -23,6 +23,7 @@ const Terms = () => {
             </p>
             
             <div className="prose prose-lg max-w-none prose-invert">
+              <div className="space-y-6">
               <p className="font-bold mb-6">AGREEMENT TO OUR LEGAL TERMS</p>
               
               <p>

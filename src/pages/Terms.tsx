@@ -49,6 +49,9 @@ const Terms = () => {
                 to receive specific notice of each such change. It is your responsibility to periodically review these Legal Terms 
                 to stay informed of updates. You will be subject to, and will be deemed to have been made aware of and to have accepted, 
                 the changes in any revised Legal Terms by your continued use of the Services after the date such revised Legal Terms are posted.
+              </p>
+
+              <p>
                 The Services are intended for users who are at least 18 years old. Persons under the age of 18 are not permitted to use or 
                 register for the Services. We recommend that you print a copy of these Legal Terms for your records.
               </p>

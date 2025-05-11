@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { disableBodyScroll, enableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import { cn } from '@/lib/utils';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,7 +19,16 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    const menu = menuRef.current;
+    if (mobileMenuOpen && menu) {
+      disableBodyScroll(menu, { reserveScrollBarGap: true });
+    } else if (menu) {
+      enableBodyScroll(menu);
+    }
+
+    return () => {
+      clearAllBodyScrollLocks();
+    };
   }, [mobileMenuOpen]);
 
   const isActive = (item: string) => {
@@ -32,24 +43,24 @@ const Navbar = () => {
     <header
       className={cn(
         'fixed top-0 w-full z-50 transition-all duration-300',
-        scrolled 
-          ? 'bg-augify-dark/95 py-2 shadow-lg backdrop-blur-sm' 
+        scrolled
+          ? 'bg-augify-dark/95 py-2 shadow-lg backdrop-blur-sm'
           : 'bg-transparent py-4'
       )}
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="relative z-10">
-          <img 
-            src="/lovable-uploads/dd644908-17ab-4a42-b8d2-04136cffb4e6.png" 
-            alt="Augify Logo" 
+          <img
+            src="/lovable-uploads/dd644908-17ab-4a42-b8d2-04136cffb4e6.png"
+            alt="Augify Logo"
             className="h-10 md:h-14"
           />
         </Link>
 
         {/* Mobile menu button */}
-        <button 
-          className="md:hidden text-white hover:text-augify-lime transition-colors z-50" 
+        <button
+          className="md:hidden text-white hover:text-augify-lime transition-colors z-50"
           onClick={() => setMobileMenuOpen(true)}
           aria-label="Toggle menu"
         >
@@ -80,12 +91,13 @@ const Navbar = () => {
           <div className="fixed inset-0 z-50">
             {/* Dimmed overlay */}
             <div
-className="fixed top-0 left-0 h-screen w-1/3 bg-black/50 backdrop-blur-sm z-40 pointer-events-auto touch-none cursor-pointer"
-  onClick={() => setMobileMenuOpen(false)}
-/>
+              className="fixed top-0 left-0 h-screen w-1/3 bg-black/50 backdrop-blur-sm z-40 pointer-events-auto touch-none cursor-pointer"
+              onClick={() => setMobileMenuOpen(false)}
+            />
 
             {/* Slide-in full-screen menu panel */}
             <nav
+              ref={menuRef}
               className={cn(
                 'fixed top-0 right-0 h-screen w-2/3 bg-augify-dark z-50 p-8 pt-20 flex flex-col space-y-6 transform transition-transform duration-300 ease-in-out overflow-y-auto',
                 mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'

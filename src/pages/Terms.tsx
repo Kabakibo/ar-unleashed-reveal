@@ -118,6 +118,7 @@ const Terms = () => {
               </p>
             </div>
           </div>
+          </div>
         </div>
       </main>
       <Footer />
